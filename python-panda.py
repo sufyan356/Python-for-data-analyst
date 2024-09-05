@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
 # from numpy.ma.core import squeeze
 
 ### SERIES FROM LIST:
@@ -13,7 +15,8 @@ import pandas as pd
 marks = [100 , 90 , 80 , 70 , 60]
 subjects = ['maths' , 'english' , 'chemistry' , 'physics' , 'urdu']
 
-# print(pd.Series(marks , index=subjects , name = "Sufyan's Marks"))   # naming
+marks_Series = pd.Series(marks , index=subjects , name = "Sufyan's Marks")  # naming
+# print(marks_Series)
 
 ### SERIES FROM DICTIONARY:
 # marks = {
@@ -88,7 +91,6 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T11481
 # print(subs.max())
 # print(subs.describe())
 
-
 ### SERIES INDEXING
 # directely negative indexing in panda not work.
 
@@ -136,3 +138,58 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T11481
 
 
 ###LOOPING
+# for i in bw:
+#     print(i)  #returns value
+
+# for i in bw.index:
+#     print(i)  #returns index
+
+### ARITHMETIC OPERATORS
+# difference_100 = 100 - marks_Series
+# print(difference_100)
+
+### RELATIONAL OPERATORS
+# find no of 50's and more than 50's by kohli
+# print(vk[vk>=50].size)
+
+# find no of duck's by kohli
+# print(vk[vk==0].size)
+
+# count the no of days when campusx owner had more than 200 subs a day
+# print(subs[subs>200].size)
+
+#find actors who have done more than 20 movies
+# noOfMoviesByActors = bw.value_counts()
+# print(noOfMoviesByActors[noOfMoviesByActors > 20])
+
+### PLOTING GRAPH ON SERIES
+# subs.plot()
+# plt.show()
+
+# bw.value_counts().head(20).plot(kind='bar')
+# plt.show()
+
+# bw.value_counts().head(20).plot(kind='pie')
+# plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
