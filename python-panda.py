@@ -173,13 +173,52 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T11481
 # plt.show()
 
 
+### SOME IMP FUNCTIONS
+#astype , between , clip , drop_duplicates , duplicated ,  isnull , dropna , fillna , isin ,
+# apply --> used to custom logic in series , copy , view
+
+# changeTypeOfVk = vk.astype('int16')
+# print(changeTypeOfVk.dtype)
+
+#find how many matches that kohli runs between 50 to 100 50 and 100 included
+# print(vk[vk.between(50 , 100)].size)
+
+# print(vk.clip(100 , 200))  # return less than 100 to 100 greater than 200 to 200 and 100 and 200 in between val makes not change
+
+# duplicatedValues = pd.Series([1,1,2,3,4,4,5,5,6,6,6,7])
+# print(duplicatedValues.drop_duplicates())  # remove duplicate by first val
+
+# duplicatedValues = pd.Series([1,1,2,3,4,4,5,5,6,6,6,7])
+# print(duplicatedValues.drop_duplicates(keep = "last"))  # remove duplicate by last val
+
+# duplicatedValues = pd.Series([1,1,2,3,4,4,5,5,6,6,6,7])
+# print(duplicatedValues.duplicated().sum())
+
+# valWithNull = pd.Series([1,2,3,np.nan , 5 , 6 , np.nan])
+# print(valWithNull.size)  #return all series size with null val
+# print(valWithNull.count())  #return all series size with out null val
+# print(valWithNull.isnull().sum())
+# print(valWithNull.dropna())
+# print(valWithNull.fillna(valWithNull.mean()))
+
+# print(vk[(vk == 49) | (vk == 99)])
+# print(vk[vk.isin([49,99])])
 
 
+# print(bw.apply(lambda x : x.split()[0].upper()))
+# print(subs.apply(lambda x: 'good-day' if x>=subs.mean() else 'bad-day'))
 
+# view = vk.head()
+# print(view)
+# view[1] = 100
+# print(view , "\n")
+# print(vk)
 
-
-
-
+# copy = vk.head().copy()
+# print(copy)
+# copy[1] = 100
+# print(copy)
+# print(vk)
 
 
 
