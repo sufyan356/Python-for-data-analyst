@@ -1,10 +1,8 @@
-from unittest.mock import inplace
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-# from numpy.ma.core import squeeze
-
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
 ### SERIES FROM LIST:
 # country = ['India' , 'Pakistan' , 'Nepal' , 'Afghanistan']
 # print(pd.Series(country))    # return --> index and value
@@ -218,3 +216,86 @@ temp = pd.Series([1,2,3,np.nan,5,6,np.nan,8,np.nan,10])
 # copy[1] = 100
 # print(copy)
 # print(vk.head())
+
+
+### DATA FRAMES IN PANDAS
+### using lists
+student_data = [
+    [100,80,10],
+    [90,70,7],
+    [120,100,14],
+    [80,50,2]
+]
+
+dataFrameList = pd.DataFrame(student_data,columns=['iq','marks','package'])
+# print(dataFrameList)
+### using dicts
+
+student_dict = {
+    'name':['nitish','ankit','rupesh','rishabh','amit','ankita'],
+    'iq':[100,90,120,80,0,0],
+    'marks':[80,70,100,50,0,0],
+    'package':[10,7,14,2,0,0]
+}
+
+students = pd.DataFrame(student_dict)
+students.set_index('name',inplace=True)
+# print(students)
+
+### using read_csv
+movies = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\movies.csv')
+# print(movies.sample(3))
+
+iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\ipl-matches.csv')
+# print(iplData.sample(3))
+
+### DataFrame Attributes and Methods
+# shape , dtypes , index , columns , values , head and tails , sample , info , describe , isnull,
+#duplicated , rename
+
+# print(movies.shape)
+# print(iplData.dtypes)
+# print(iplData.columns)
+# print(iplData.values) # return values in 2d numpy array
+# print(iplData.head())
+# print(iplData.tail())
+# print(iplData.sample())
+# print(iplData.info())
+# print(iplData.describe()) # work only numerical col to perform mathematical operations like mean , median etc
+# print(iplData.isnull().sum())
+# print(students.duplicated().sum())
+# dataFrameList.rename(columns={'iq': 'IQ' , 'marks' : 'MARKS' , 'package' : 'LPA'} , inplace=True)
+# print(dataFrameList)
+
+
+### Math Methods
+
+# print(dataFrameList)
+# print(dataFrameList.sum(axis=1))
+# print(dataFrameList.mean(axis=1))
+# print(dataFrameList.var())
+
+### Selecting cols from a DataFrame
+# single cols
+# print(movies['title_x'])
+
+# multiple cols
+# print(movies[['title_x' , 'imdb_id' , 'summary']])
+
+### Selecting rows from a DataFrame
+# iloc - searches using index positions
+# loc - searches using index labels
+
+# print(iplData.iloc[0]) #retuen 1st row data
+# print(iplData.iloc[0 , 1]) #return 0th row of 1th col
+# print(iplData.iloc[0:3 , 0:3]) #return 3 rows and 3 col data
+# print(iplData.iloc[: , 5:7]) #return all rows but 5th and 6th col data
+
+# print(students.loc[['nitish','ankita','rupesh']])
+# print(movies.loc[0:2]) # starting ending values works with len not index
+# print(movies.loc[0:2,'title_x':'poster_path'])
+
+### Filtering a DataFrame
+
+## find all the final winners
+print(iplData[iplData['MatchNumber'] == 'Final'])
