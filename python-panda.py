@@ -1,5 +1,8 @@
+from unittest.mock import inplace
+
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 # from numpy.ma.core import squeeze
 
 ### SERIES FROM LIST:
@@ -136,7 +139,82 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 
 
 ###LOOPING
-for i in bw.index:
-  print(i)
+# for i in bw.index:
+#   print(i)
 
-### Relational Operators
+### Boolean Indexing on Series
+
+# Find no of 50's and 100's scored by kohli
+# print(vk[vk >= 50].size)
+
+# find number of ducks
+# print(vk[vk == 0].size)
+
+# Count number of day when I had more than 200 subs a day
+# print(subs[subs > 200].size)
+
+# find actors who have done more than 20 movies
+# num_movies = bw.value_counts()
+# print(num_movies[num_movies > 20])
+
+# PLOTTING GRAPH ON SERIES
+# subs.plot()
+# plt.show()
+
+# bw.value_counts().head(20).plot(kind='pie')
+# plt.show()
+
+### Some Important Series Methods
+# astype
+# between
+# clip  --> return less than 100 to 100 more than 200 to 200
+# drop_duplicates
+# isnull
+# dropna
+# fillna
+# isin
+# apply
+# copy
+# size return size with null val
+# count return count without null val
+#isin
+# apply
+#copy and view
+
+# changingDtype = vk.astype('int16')
+# print(changingDtype)
+
+# print(vk[vk.between(51,99)].size)
+# print(subs.clip(100,200))
+
+# temp = pd.Series([1,1,2,2,3,3,4,4])
+# print(temp.drop_duplicates(keep='last'))
+# print(temp.duplicated().sum())
+
+# print(vk.duplicated().sum())
+
+temp = pd.Series([1,2,3,np.nan,5,6,np.nan,8,np.nan,10])
+# print(temp.size)
+# print(temp.count())
+
+# print(temp.isnull().sum())
+# print(temp.dropna())
+# print(temp.fillna(temp.mean()))
+
+# print(vk[(vk == 49) | (vk == 99)])
+# print(vk[vk.isin([49,99])])
+
+# print(bw.apply(lambda x:x.split()[0].upper()))
+# print(subs.apply(lambda x:'good day' if x > subs.mean() else 'bad day'))
+
+# view = vk.head()
+# print(view)
+# view[1] = 100
+# print(view)
+# print(vk.head())
+
+# copy = vk.head().copy()
+# print(copy)
+# copy[1] = 100
+# print(copy)
+# print(vk.head())
