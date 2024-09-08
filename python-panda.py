@@ -45,13 +45,13 @@ subjects = ['maths' , 'english' , 'chemistry' , 'physics' , 'urdu']
 # print("Size: " , marksSeriesDict.values)  #returns the numpy array
 
 ### SERIES USING REAL WORLD DATA SET
-subs = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\subs.csv').squeeze()
+subs = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\subs.csv').squeeze()
 # print(subs) #squeezed Fun return data in series
 
-vk = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\kohli_ipl.csv' ,  index_col = 'match_no').squeeze()
+vk = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\kohli_ipl.csv' ,  index_col = 'match_no').squeeze()
 # print(vk)
 
-bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\bollywood.csv' , index_col = 'movie').squeeze()
+bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollywood.csv' , index_col = 'movie').squeeze()
 # print(bw)
 
 
@@ -136,3 +136,7 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T11481
 
 
 ###LOOPING
+for i in bw.index:
+  print(i)
+
+### Relational Operators
