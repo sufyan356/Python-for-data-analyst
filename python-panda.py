@@ -1,11 +1,5 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-
-pd.set_option('display.max_columns', None)
-pd.set_option('display.width', None)  # Disable line wrapping
-
-
 # from numpy.ma.core import squeeze
 
 ### SERIES FROM LIST:
@@ -19,8 +13,7 @@ pd.set_option('display.width', None)  # Disable line wrapping
 marks = [100 , 90 , 80 , 70 , 60]
 subjects = ['maths' , 'english' , 'chemistry' , 'physics' , 'urdu']
 
-marks_Series = pd.Series(marks , index=subjects , name = "Sufyan's Marks")  # naming
-# print(marks_Series)
+# print(pd.Series(marks , index=subjects , name = "Sufyan's Marks"))   # naming
 
 ### SERIES FROM DICTIONARY:
 # marks = {
@@ -52,13 +45,13 @@ marks_Series = pd.Series(marks , index=subjects , name = "Sufyan's Marks")  # na
 # print("Size: " , marksSeriesDict.values)  #returns the numpy array
 
 ### SERIES USING REAL WORLD DATA SET
-# subs = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\subs.csv').squeeze()
+subs = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\subs.csv').squeeze()
 # print(subs) #squeezed Fun return data in series
 
-# vk = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\kohli_ipl.csv' ,  index_col = 'match_no').squeeze()
+vk = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\kohli_ipl.csv' ,  index_col = 'match_no').squeeze()
 # print(vk)
 
-# bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollywood.csv' , index_col = 'movie').squeeze()
+bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\bollywood.csv' , index_col = 'movie').squeeze()
 # print(bw)
 
 
@@ -94,6 +87,7 @@ marks_Series = pd.Series(marks , index=subjects , name = "Sufyan's Marks")  # na
 # print(subs.min())
 # print(subs.max())
 # print(subs.describe())
+
 
 ### SERIES INDEXING
 # directely negative indexing in panda not work.
@@ -142,135 +136,3 @@ marks_Series = pd.Series(marks , index=subjects , name = "Sufyan's Marks")  # na
 
 
 ###LOOPING
-# for i in bw:
-#     print(i)  #returns value
-
-# for i in bw.index:
-#     print(i)  #returns index
-
-### ARITHMETIC OPERATORS
-# difference_100 = 100 - marks_Series
-# print(difference_100)
-
-### RELATIONAL OPERATORS
-# find no of 50's and more than 50's by kohli
-# print(vk[vk>=50].size)
-
-# find no of duck's by kohli
-# print(vk[vk==0].size)
-
-# count the no of days when campusx owner had more than 200 subs a day
-# print(subs[subs>200].size)
-
-#find actors who have done more than 20 movies
-# noOfMoviesByActors = bw.value_counts()
-# print(noOfMoviesByActors[noOfMoviesByActors > 20])
-
-### PLOTING GRAPH ON SERIES
-# subs.plot()
-# plt.show()
-
-# bw.value_counts().head(20).plot(kind='bar')
-# plt.show()
-
-# bw.value_counts().head(20).plot(kind='pie')
-# plt.show()
-
-
-### SOME IMP FUNCTIONS
-#astype , between , clip , drop_duplicates , duplicated ,  isnull , dropna , fillna , isin ,
-# apply --> used to custom logic in series , copy , view
-
-# changeTypeOfVk = vk.astype('int16')
-# print(changeTypeOfVk.dtype)
-
-#find how many matches that kohli runs between 50 to 100 50 and 100 included
-# print(vk[vk.between(50 , 100)].size)
-
-# print(vk.clip(100 , 200))  # return less than 100 to 100 greater than 200 to 200 and 100 and 200 in between val makes not change
-
-# duplicatedValues = pd.Series([1,1,2,3,4,4,5,5,6,6,6,7])
-# print(duplicatedValues.drop_duplicates())  # remove duplicate by first val
-
-# duplicatedValues = pd.Series([1,1,2,3,4,4,5,5,6,6,6,7])
-# print(duplicatedValues.drop_duplicates(keep = "last"))  # remove duplicate by last val
-
-# duplicatedValues = pd.Series([1,1,2,3,4,4,5,5,6,6,6,7])
-# print(duplicatedValues.duplicated().sum())
-
-# valWithNull = pd.Series([1,2,3,np.nan , 5 , 6 , np.nan])
-# print(valWithNull.size)  #return all series size with null val
-# print(valWithNull.count())  #return all series size with out null val
-# print(valWithNull.isnull().sum())
-# print(valWithNull.dropna())
-# print(valWithNull.fillna(valWithNull.mean()))
-
-# print(vk[(vk == 49) | (vk == 99)])
-# print(vk[vk.isin([49,99])])
-
-
-# print(bw.apply(lambda x : x.split()[0].upper()))
-# print(subs.apply(lambda x: 'good-day' if x>=subs.mean() else 'bad-day'))
-
-# view = vk.head()
-# print(view)
-# view[1] = 100
-# print(view , "\n")
-# print(vk)
-
-# copy = vk.head().copy()
-# print(copy)
-# copy[1] = 100
-# print(copy)
-# print(vk)
-
-### PANDA DATA FRAMES
-# More than 1 col and more than 1 row called an data frames
-# single col and single row called an series
-
-### DATAFRAMES WITH LISTS
-stdData = [
-    [100 , 90 , 10000],
-    [90 , 80 , 30000],
-    [80 , 70 , 20000],
-]
-stdDataWithDataFrames = pd.DataFrame(stdData , columns = ['iq' , 'marks' , 'package'])
-# print(stdDataWithDataFrames)
-
-stdDict = {
-    'iq' : [100 , 90 , 80],
-    'marks' : [100 , 90 , 80],
-    'package' : [100 , 90 , 80],
-}
-stdDictDataframes = pd.DataFrame(stdDict)
-# print(stdDictDataframes)
-
-### READING CSV FILES
-iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\ipl-matches.csv')
-# print(iplData.head())
-moviesData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\movies.csv')
-# print(moviesData.head())
-
-### DATAFRAMES ATTRIBUTES AND METHODS:
-# shape , dtypes , index , columns , values , head , tail , sample , info  --> returns name of col and dtypes and how many null val ,
-# describe ---> only work in numerical col ; provide the summary of mathematical fun like mean and median
-# isnull , duplicated , rename
-print(iplData.shape)
-# print(iplData.dtypes)
-# print(iplData.index)
-# print(iplData.columns)
-# print(iplData.values)  # return val in 2d numpy array
-# print(iplData.sample(3))
-# print(iplData.info())
-# print(iplData.describe())
-# print(iplData.isnull().sum()) #return every col null val
-# print(moviesData.duplicated().sum())
-# stdDictDataframes.rename(columns = {'iq' : 'Iq' , 'marks' : 'Marks' , 'package' : 'LPA'} , inplace = True)
-# print(stdDictDataframes)
-
-
-
-
-
-
-
