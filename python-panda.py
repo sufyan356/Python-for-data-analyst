@@ -2,6 +2,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)  # Disable line wrapping
+
+
 # from numpy.ma.core import squeeze
 
 ### SERIES FROM LIST:
@@ -48,13 +52,13 @@ marks_Series = pd.Series(marks , index=subjects , name = "Sufyan's Marks")  # na
 # print("Size: " , marksSeriesDict.values)  #returns the numpy array
 
 ### SERIES USING REAL WORLD DATA SET
-subs = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\subs.csv').squeeze()
+# subs = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\subs.csv').squeeze()
 # print(subs) #squeezed Fun return data in series
 
-vk = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\kohli_ipl.csv' ,  index_col = 'match_no').squeeze()
+# vk = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\kohli_ipl.csv' ,  index_col = 'match_no').squeeze()
 # print(vk)
 
-bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T114815Z-001\datasets-session-16\bollywood.csv' , index_col = 'movie').squeeze()
+# bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollywood.csv' , index_col = 'movie').squeeze()
 # print(bw)
 
 
@@ -220,11 +224,49 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\datasets-session-16-20240904T11481
 # print(copy)
 # print(vk)
 
+### PANDA DATA FRAMES
+# More than 1 col and more than 1 row called an data frames
+# single col and single row called an series
 
+### DATAFRAMES WITH LISTS
+stdData = [
+    [100 , 90 , 10000],
+    [90 , 80 , 30000],
+    [80 , 70 , 20000],
+]
+stdDataWithDataFrames = pd.DataFrame(stdData , columns = ['iq' , 'marks' , 'package'])
+# print(stdDataWithDataFrames)
 
+stdDict = {
+    'iq' : [100 , 90 , 80],
+    'marks' : [100 , 90 , 80],
+    'package' : [100 , 90 , 80],
+}
+stdDictDataframes = pd.DataFrame(stdDict)
+# print(stdDictDataframes)
 
+### READING CSV FILES
+iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\ipl-matches.csv')
+# print(iplData.head())
+moviesData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\movies.csv')
+# print(moviesData.head())
 
-
+### DATAFRAMES ATTRIBUTES AND METHODS:
+# shape , dtypes , index , columns , values , head , tail , sample , info  --> returns name of col and dtypes and how many null val ,
+# describe ---> only work in numerical col ; provide the summary of mathematical fun like mean and median
+# isnull , duplicated , rename
+print(iplData.shape)
+# print(iplData.dtypes)
+# print(iplData.index)
+# print(iplData.columns)
+# print(iplData.values)  # return val in 2d numpy array
+# print(iplData.sample(3))
+# print(iplData.info())
+# print(iplData.describe())
+# print(iplData.isnull().sum()) #return every col null val
+# print(moviesData.duplicated().sum())
+# stdDictDataframes.rename(columns = {'iq' : 'Iq' , 'marks' : 'Marks' , 'package' : 'LPA'} , inplace = True)
+# print(stdDictDataframes)
 
 
 
