@@ -1,3 +1,5 @@
+from unittest.mock import inplace
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -298,4 +300,33 @@ iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\i
 ### Filtering a DataFrame
 
 ## find all the final winners
-print(iplData[iplData['MatchNumber'] == 'Final'])
+# print(iplData[iplData['MatchNumber'] == 'Final'][['WinningTeam' , 'Season']])
+
+## how many matches has csk won in kolkata
+# print(iplData[(iplData['WinningTeam'] == 'Chennai Super Kings') & (iplData['City'] == 'Kolkata')].shape[0])
+
+## toss winner is match winner in percentage
+# print(iplData[iplData['WinningTeam'] == iplData['TossWinner']].shape[0] / iplData.shape[0] * 100)
+
+## movies with rating higher than 8 and votes>10000
+# print(movies[(movies['imdb_rating'] > 8) & (movies['imdb_votes'] > 10000)].shape[0])
+
+## Action movies with rating higher than 7
+
+# print(movies[(movies['genres'] == 'Action') & (movies['imdb_rating'] > 7)])
+
+
+## adding lead actors columns
+# movies.dropna(inplace=True)
+# first_names = movies['actors'].str.split('|').apply(lambda x: x[0])
+# movies['lead actors'] = first_names
+# print(movies['lead actors'])
+
+## Important DataFrame Functions
+# astype
+# iplData['ID'] = iplData['ID'].astype('int16')
+# iplData['Team1'] = iplData['Team1'].astype('category')
+# iplData['Team2'] = iplData['Team2'].astype('category')
+#
+# print(iplData.info())
+
