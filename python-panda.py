@@ -1,8 +1,10 @@
-from unittest.mock import inplace
+
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from pandas import read_csv
+
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
 ### SERIES FROM LIST:
@@ -193,7 +195,7 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 
 # print(vk.duplicated().sum())
 
-temp = pd.Series([1,2,3,np.nan,5,6,np.nan,8,np.nan,10])
+# temp = pd.Series([1,2,3,np.nan,5,6,np.nan,8,np.nan,10])
 # print(temp.size)
 # print(temp.count())
 
@@ -219,7 +221,7 @@ temp = pd.Series([1,2,3,np.nan,5,6,np.nan,8,np.nan,10])
 # print(copy)
 # print(vk.head())
 
-
+### VIDEO 01
 ### DATA FRAMES IN PANDAS
 ### using lists
 student_data = [
@@ -327,6 +329,72 @@ iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\i
 # iplData['ID'] = iplData['ID'].astype('int16')
 # iplData['Team1'] = iplData['Team1'].astype('category')
 # iplData['Team2'] = iplData['Team2'].astype('category')
-#
 # print(iplData.info())
 
+
+###VIDEO 02
+# value_counts(series & Dataframes) , sort_values() , rank , set index , rename , reset index , unique , nunique ,
+# isnull , notnull , hasnans , dropna , fillna , drop_duplicates , drop , apply , isin , corr
+# nlargest , nsmallest , insert , copy
+
+## value_counts(series & Dataframes)
+## FIND WHICH PLAYER HAS WON MOST POTM -> IN FINALS AND QUALIFIERS
+# print(iplData[~iplData['MatchNumber'].str.isdigit()]['Player_of_Match'].value_counts())
+
+## Toss decision plot
+# iplData['TossDecision'].value_counts().plot(kind = 'pie')
+# plt.show()
+
+## how many matches each team has played
+# print((iplData['Team1'].value_counts() + iplData['Team2'].value_counts()).sort_values(ascending = False))
+
+## sort_values(series and dataframe) -> ascending -> na_position -> inplace -> multiple cols
+
+students = pd.DataFrame(
+    {
+        'name':['nitish','ankit','rupesh',np.nan,'mrityunjay',np.nan,'rishabh',np.nan,'aditya',np.nan],
+        'college':['bit','iit','vit',np.nan,np.nan,'vlsi','ssit',np.nan,np.nan,'git'],
+        'branch':['eee','it','cse',np.nan,'me','ce','civ','cse','bio',np.nan],
+        'cgpa':[6.66,8.25,6.41,np.nan,5.6,9.0,7.4,10,7.4,np.nan],
+        'package':[4,5,6,np.nan,6,7,8,9,np.nan,np.nan]
+
+    }
+)
+
+# students.sort_values('name' , na_position = 'first' , ascending = False , inplace = True)
+# print(students)
+
+# print(movies.sort_values(['title_x' , 'title_y'] , ascending=[False , True]))
+
+## rank(series)
+batsmanRuns = read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\batsman_runs_ipl.csv')
+
+## ADDING BATTING RANK COL
+batsmanRuns['rank'] = batsmanRuns['batsman_run'].rank(ascending=False)
+# print(batsmanRuns.sort_values('batsman_run' , ascending=False))
+
+## sort_index(series and dataframe)
+# print(iplData.sort_index(ascending=False))
+
+## set_index(dataframe) -> inplace
+batsmanRuns.set_index('batter' , inplace = True)
+# print(batsmanRuns.sort_values('batsman_run' , ascending = False))
+
+## reset_index(series + dataframe) -> drop parameter
+# batsmanRuns.reset_index(inplace = True)
+# print(batsmanRuns)
+
+### how to replace existing index without loosing
+# print(batsmanRuns.reset_index().set_index('rank'))
+
+## rename(dataframe) -> index
+
+# movies.set_index('title_x',inplace=True)
+# movies.rename(columns = {'poster_path' : 'poster_link'} , inplace = True)
+# movies.rename(index = {'Uri: The Surgical Strike' : 'The Surgical Strike'} , inplace = True)
+# print(movies.head())
+
+# unique(series)
+temp = pd.Series([1,1,2,2,3,3,4,4,5,5,np.nan,np.nan])
+print(len(temp.unique()))
+print(temp.nunique())
