@@ -394,7 +394,67 @@ batsmanRuns.set_index('batter' , inplace = True)
 # movies.rename(index = {'Uri: The Surgical Strike' : 'The Surgical Strike'} , inplace = True)
 # print(movies.head())
 
-# unique(series)
-# temp = pd.Series([1,1,2,2,3,3,4,4,5,5,np.nan,np.nan])
+##unique(series)
+temp = pd.Series([1,1,2,2,3,3,4,4,5,5,np.nan,np.nan])
 # print(len(temp.unique()))
+
+## nunique(series + dataframe) -> does not count nan -> dropna parameter
 # print(temp.nunique())
+
+## isnull(series + dataframe)
+
+# print(iplData['ID'].isnull().sum())
+# print(iplData.isnull().sum())
+# print(iplData['City'][iplData['City'].isnull()])
+
+## notnull(series + dataframe)
+# print(iplData['City'][iplData['City'].notnull()])
+
+## hasnans(series)
+# print(iplData['City'].hasnans)
+
+## dropna(series + dataframe) -> how parameter -> works like or
+
+# print(students.dropna(how = 'any'))
+# print(students.dropna(how = 'all'))
+# print(students.dropna(subset = ['name' , 'college']))
+
+## fillna(series + dataframe)
+
+# print(students['name'].fillna('unknown'))
+# print(students['package'].fillna(students['package'].mean()))
+# print(students['name'].bfill())
+# print(students['name'].ffill())
+
+## drop_duplicates(series + dataframe) -> works like and -> duplicated()
+# print(students.drop_duplicates())
+# print(students['name'].drop_duplicates(keep = 'last'))
+
+## find the last match played by virat kohli in Delhi
+
+# print(iplData[((iplData['Team1Players'].str.contains('V Kohli')) +
+#               (iplData['Team2Players'].str.contains('Kohli'))) &
+#               (iplData['City'] == 'Delhi')].head(1))
+
+## drop(series + dataframe)
+
+# print(students.drop(index = [0,2]))
+# print(students.set_index('name').drop(columns = ['branch']))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
