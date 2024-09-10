@@ -3,7 +3,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandas import read_csv
+
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
@@ -367,7 +367,7 @@ students = pd.DataFrame(
 # print(movies.sort_values(['title_x' , 'title_y'] , ascending=[False , True]))
 
 ## rank(series)
-batsmanRuns = read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\batsman_runs_ipl.csv')
+batsmanRuns = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\batsman_runs_ipl.csv')
 
 ## ADDING BATTING RANK COL
 batsmanRuns['rank'] = batsmanRuns['batsman_run'].rank(ascending=False)
@@ -440,6 +440,26 @@ temp = pd.Series([1,1,2,2,3,3,4,4,5,5,np.nan,np.nan])
 
 # print(students.drop(index = [0,2]))
 # print(students.set_index('name').drop(columns = ['branch']))
+
+## apply(series + dataframe)
+# def mul(num):
+#     return num**2
+# print(temp.apply(mul))
+
+#POINTS DATA FRAME
+pointsDF = pd.DataFrame({
+    'point1' : [(1,3) , (-2,5) , (6,5) , (8,0)],
+    'point2' : [(-5,-9) , (9,1) , (3,4) , (6,7)]
+})
+
+def euclidean(row):
+    pointA = row['point1']
+    pointB = row['point2']
+    return ((pointA[0] - pointB[0])**2 + (pointA[1] - pointB[1])**2)**0.5
+
+pointsDF['distance'] = pointsDF.apply(euclidean, axis = 1)
+
+print(pointsDF)
 
 
 
