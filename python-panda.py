@@ -447,19 +447,57 @@ temp = pd.Series([1,1,2,2,3,3,4,4,5,5,np.nan,np.nan])
 # print(temp.apply(mul))
 
 #POINTS DATA FRAME
-pointsDF = pd.DataFrame({
-    'point1' : [(1,3) , (-2,5) , (6,5) , (8,0)],
-    'point2' : [(-5,-9) , (9,1) , (3,4) , (6,7)]
-})
+# pointsDF = pd.DataFrame({
+#     'point1' : [(1,3) , (-2,5) , (6,5) , (8,0)],
+#     'point2' : [(-5,-9) , (9,1) , (3,4) , (6,7)]
+# })
 
-def euclidean(row):
-    pointA = row['point1']
-    pointB = row['point2']
-    return ((pointA[0] - pointB[0])**2 + (pointA[1] - pointB[1])**2)**0.5
+# def euclidean(row):
+#     pointA = row['point1']
+#     pointB = row['point2']
+#     return ((pointA[0] - pointB[0])**2 + (pointA[1] - pointB[1])**2)**0.5
 
-pointsDF['distance'] = pointsDF.apply(euclidean, axis = 1)
+# pointsDF['distance'] = pointsDF.apply(euclidean, axis = 1)
+# print(pointsDF)
 
-print(pointsDF)
+################################### <<< GROUP BY PANDA >>> #################################################
+matchDeleviries = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-19\deliveries.csv')
+# print(matchDeleviries.head())
+
+topMovies = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-19\imdb-top-1000.csv')
+# grpByGenre = topMovies.groupby('Genre')
+
+## Applying builtin aggregation fuctions on groupby objects
+# print(topMovies.select_dtypes(include='number').std())
+
+## find the top 3 genres by total earning
+# grpByGenre = topMovies.groupby('Genre')
+# print(grpByGenre['Gross'].sum().sort_values(ascending=False).head(3))
+
+## find the genre with highest avg IMDB rating
+# grpByGenre = topMovies.groupby('Genre')
+# print(grpByGenre['IMDB_Rating'].mean().sort_values(ascending=False).head(1))
+
+## find director with most popularity
+# print(topMovies.head())
+# grpByDirector = topMovies.groupby('Director')
+# print(grpByDirector['No_of_Votes'].max().sort_values(ascending=False).head())
+
+## find the highest rated movie of each genre
+# print(topMovies.head())
+# grpByGenre = topMovies.groupby('Genre')
+# print(grpByGenre['IMDB_Rating'].max().sort_values(ascending=False).head(1))
+
+## GroupBy Attributes and Methods
+
+# find total number of groups -> len
+# find items in each group -> size
+# first()/last() -> nth item
+# get_group -> vs filtering
+# groups
+# describe
+# sample
+# nunique
 
 
 
