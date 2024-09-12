@@ -1,5 +1,4 @@
 
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -225,25 +224,25 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 ### DATA FRAMES IN PANDAS
 ### using lists
 student_data = [
-    [100,80,10],
-    [90,70,7],
-    [120,100,14],
-    [80,50,2]
+    [100 ,80 ,10],
+    [90 ,70 ,7],
+    [120 ,100 ,14],
+    [80 ,50 ,2]
 ]
 
-dataFrameList = pd.DataFrame(student_data,columns=['iq','marks','package'])
+dataFrameList = pd.DataFrame(student_data ,columns=['iq' ,'marks' ,'package'])
 # print(dataFrameList)
 ### using dicts
 
 student_dict = {
-    'name':['nitish','ankit','rupesh','rishabh','amit','ankita'],
-    'iq':[100,90,120,80,0,0],
-    'marks':[80,70,100,50,0,0],
-    'package':[10,7,14,2,0,0]
+    'name' :['nitish' ,'ankit' ,'rupesh' ,'rishabh' ,'amit' ,'ankita'],
+    'iq' :[100 ,90 ,120 ,80 ,0 ,0],
+    'marks' :[80 ,70 ,100 ,50 ,0 ,0],
+    'package' :[10 ,7 ,14 ,2 ,0 ,0]
 }
 
 students = pd.DataFrame(student_dict)
-students.set_index('name',inplace=True)
+students.set_index('name' ,inplace=True)
 # print(students)
 
 ### using read_csv
@@ -352,11 +351,11 @@ iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\i
 
 students = pd.DataFrame(
     {
-        'name':['nitish','ankit','rupesh',np.nan,'mrityunjay',np.nan,'rishabh',np.nan,'aditya',np.nan],
-        'college':['bit','iit','vit',np.nan,np.nan,'vlsi','ssit',np.nan,np.nan,'git'],
-        'branch':['eee','it','cse',np.nan,'me','ce','civ','cse','bio',np.nan],
-        'cgpa':[6.66,8.25,6.41,np.nan,5.6,9.0,7.4,10,7.4,np.nan],
-        'package':[4,5,6,np.nan,6,7,8,9,np.nan,np.nan]
+        'name' :['nitish' ,'ankit' ,'rupesh' ,np.nan ,'mrityunjay' ,np.nan ,'rishabh' ,np.nan ,'aditya' ,np.nan],
+        'college' :['bit' ,'iit' ,'vit' ,np.nan ,np.nan ,'vlsi' ,'ssit' ,np.nan ,np.nan ,'git'],
+        'branch' :['eee' ,'it' ,'cse' ,np.nan ,'me' ,'ce' ,'civ' ,'cse' ,'bio' ,np.nan],
+        'cgpa' :[6.66 ,8.25 ,6.41 ,np.nan ,5.6 ,9.0 ,7.4 ,10 ,7.4 ,np.nan],
+        'package' :[4 ,5 ,6 ,np.nan ,6 ,7 ,8 ,9 ,np.nan ,np.nan]
 
     }
 )
@@ -395,7 +394,7 @@ batsmanRuns.set_index('batter' , inplace = True)
 # print(movies.head())
 
 ##unique(series)
-temp = pd.Series([1,1,2,2,3,3,4,4,5,5,np.nan,np.nan])
+temp = pd.Series([1 ,1 ,2 ,2 ,3 ,3 ,4 ,4 ,5 ,5 ,np.nan ,np.nan])
 # print(len(temp.unique()))
 
 ## nunique(series + dataframe) -> does not count nan -> dropna parameter
@@ -480,13 +479,19 @@ topMovies = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-19
 
 ## find director with most popularity
 # print(topMovies.head())
-# grpByDirector = topMovies.groupby('Director')
+grpByDirector = topMovies.groupby('Director')
 # print(grpByDirector['No_of_Votes'].max().sort_values(ascending=False).head())
 
 ## find the highest rated movie of each genre
 # print(topMovies.head())
-# grpByGenre = topMovies.groupby('Genre')
+grpByGenre = topMovies.groupby('Genre')
 # print(grpByGenre['IMDB_Rating'].max().sort_values(ascending=False).head(1))
+
+## find number of movies done by each actor
+# grpByStars = topMovies.groupby('Star1')
+# print(grpByStars['Series_Title'].count().sort_values(ascending=False))
+# print(grpByStars['Series_Title'].size().sort_values(ascending=False))
+
 
 ## GroupBy Attributes and Methods
 
@@ -499,20 +504,82 @@ topMovies = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-19
 # sample
 # nunique
 
+# print(len(topMovies.groupby('Genre')))
+# print(topMovies['Genre'].nunique())
+# print(topMovies.groupby('Genre').size())
+# print(topMovies.groupby('Genre').first())
+# print(topMovies.groupby('Genre').last())
+# print(topMovies.groupby('Genre').nth(2)) return 3rd movie if exist
+
+## find the genre where genre is equal to Action
+# print(topMovies[topMovies['Genre'] == 'Action'])
+# print(topMovies.groupby('Genre').get_group('Action'))
+
+# print(topMovies.groupby('Genre').groups)
+# print(topMovies.groupby('Genre').describe())
+# print(topMovies.groupby('Genre').sample(2 , replace= True))
+# print(topMovies.groupby('Genre').nunique())
 
 
+## agg method
+## passing dict
+# a = grpByGenre.agg(
+#     {
+#         'Series_Title' : ['min' , 'max'],
+#         'Released_Year' : 'sum'
+#     }
+# )
+# print(a)
+
+# print(grpByGenre.agg(['min' , 'max']))
 
 
+### looping on groups
 
+# for group , data in grpByDirector:
+#    print(data)
 
+### split (apply) combine
+# apply -> builtin function
 
+# print(grpByGenre.apply(min , include_groups = False))
 
+### find movies starting with A for each group
+# def foo(group):
+#     return group[group['Series_Title'].str.startswith('A')]
+# print(grpByGenre.apply(foo , include_groups=False))
 
+### find ranking of each movie in the group according to IMDB score
 
+# def ranking(group):
+#     group['genre_rank'] = group['IMDB_Rating'].rank(ascending=False)
+#     return group
+#
+# print(grpByGenre.apply(ranking , include_groups=False))
 
+### find normalized IMDB rating group wise
 
+# def norm_rating(group):
+#     group['normalized_rating'] = (group['IMDB_Rating'] - group['IMDB_Rating'].min() / group['IMDB_Rating'].max() - group['IMDB_Rating'].min())
+#     return group
+# print(grpByGenre.apply(norm_rating , include_groups=False))
 
+### groupby on multiple cols
 
+grpOnMulCol = topMovies.groupby(['Director','Star1'])
+# print(grpOnMulCol.sample())
+# print(grpOnMulCol.size().sort_values(ascending=False))
 
+## get_group
+# print(grpOnMulCol.get_group(('Joel Coen','Ethan Coen')))
 
+### find the most earning actor->director combo
+# print(grpOnMulCol['Gross'].sum().sort_values(ascending=False))
 
+### find the best(in-terms of metascore(avg)) actor->genre combo
+# actorAndGenre = topMovies.groupby(['Star1','Genre'])
+# print(actorAndGenre['Metascore'].mean().reset_index().sort_values('Metascore' , ascending=False))
+
+### agg on multiple groupby
+# numeric_columns = topMovies.select_dtypes(include=['number']).columns
+# print(grpOnMulCol[numeric_columns].agg(['min','max','mean']))
