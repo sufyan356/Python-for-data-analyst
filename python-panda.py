@@ -583,3 +583,43 @@ grpOnMulCol = topMovies.groupby(['Director','Star1'])
 ### agg on multiple groupby
 # numeric_columns = topMovies.select_dtypes(include=['number']).columns
 # print(grpOnMulCol[numeric_columns].agg(['min','max','mean']))
+
+### EXERCISE:
+
+### find the top 10 batsman in terms of runs
+# print(matchDeleviries.groupby('batsman')['batsman_runs'].sum().sort_values(ascending=False).head(10))
+
+### find the batsman with max no of sixes
+
+# six = matchDeleviries[matchDeleviries['batsman_runs'] == 6]
+# print(six.groupby('batsman')['batsman_runs'].value_counts().sort_values(ascending=False).head(1).index[0])
+
+### find batsman with most number of 4's and 6's in last 5 overs
+
+# lastFiveOvers = matchDeleviries[matchDeleviries['over'] > 15]
+# lastFiveOvers = lastFiveOvers[(lastFiveOvers['batsman_runs'] == 4) | (lastFiveOvers['batsman_runs'] == 6)]
+# print(lastFiveOvers.groupby('batsman')['batsman'].count().sort_values(ascending=False))
+
+### find V Kohli's record against all teams
+# virat = matchDeleviries[matchDeleviries['batsman'] == 'V Kohli']
+# print(virat.groupby('bowling_team')['batsman_runs'].sum().sort_values(ascending=False))
+
+### Create a function that can return the highest score of batsman
+
+# def highestScore(group):
+#     return group
+# print(matchDeleviries.groupby('batsman')['batsman_runs'].sum().sort_values(ascending=False).apply(highestScore))
+
+### Create a function that can return the highest score of any batsman
+
+# def highest(group):
+#     gayle = matchDeleviries[matchDeleviries['batsman'] == group]
+#     return(gayle.groupby('match_id')['batsman_runs'].sum().sort_values(ascending=False).head(1).values[0])
+# print(highest('CH Gayle'))
+
+
+
+
+
+
+
