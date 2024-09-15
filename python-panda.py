@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
-### SERIES FROM LIST:
+############################## <<< SERIES FROM LIST >>> ##############################
 # country = ['India' , 'Pakistan' , 'Nepal' , 'Afghanistan']
 # print(pd.Series(country))    # return --> index and value
 
@@ -19,7 +19,8 @@ subjects = ['maths' , 'english' , 'chemistry' , 'physics' , 'urdu']
 
 # print(pd.Series(marks , index=subjects , name = "Sufyan's Marks"))   # naming
 
-### SERIES FROM DICTIONARY:
+############################## <<< SERIES FROM DICTIONARY >>> ##############################
+
 # marks = {
 #     "maths" : 100,
 #     "english" : 90,
@@ -30,7 +31,7 @@ subjects = ['maths' , 'english' , 'chemistry' , 'physics' , 'urdu']
 # marksSeriesDict = pd.Series (marks , name = "Sufyan's Marks")
 # print(marksSeriesDict)
 
-### SERIES ATTRIBUTES
+############################## <<< SERIES ATTRIBUTES >>> ##############################
 # size , dtype , name --> return col name , is_unique , index , values
 
 # marks = {
@@ -48,7 +49,7 @@ subjects = ['maths' , 'english' , 'chemistry' , 'physics' , 'urdu']
 # print("index: " , marksSeriesDict.index)
 # print("Size: " , marksSeriesDict.values)  #returns the numpy array
 
-### SERIES USING REAL WORLD DATA SET
+############################## <<< SERIES USING REAL WORLD DATA SET >>> ##############################
 subs = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\subs.csv').squeeze()
 # print(subs) #squeezed Fun return data in series
 
@@ -59,7 +60,7 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 # print(bw)
 
 
-### SERIES METHODS
+############################## <<< SERIES METHODS >>> ###############################
 # head , tails , sample , value_counts , sort_values , sort_index
 # print(subs.head()) ###returns by default 5 top values
 # print(subs.head(10))
@@ -78,7 +79,7 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 # print(bw.sort_index())
 
 
-### SERIES MATHS METHODS
+############################## <<< SERIES MATHS METHODS >>> ###############################
 # count --> null val does not count , sum , product , mean , median , mode , std , var , min , max , describe
 # print(subs.count())
 # print(subs.sum())
@@ -93,7 +94,7 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 # print(subs.describe())
 
 
-### SERIES INDEXING
+############################## <<< SERIES INDEXING >>> ###############################
 # directely negative indexing in panda not work.
 
 # x = pd.Series([1,3,2,5,4,7,6,9])
@@ -105,18 +106,17 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 # print(bw.iloc[0]) # iloc used when index value is not set integer numbers in bw case index value is movie name that why we used iloc
 
 
-### SERIES SLICING
+############################## <<< SERIES SLICING >>> ##################################################
 # print(subs[0:101])
 # print(bw[-5:])
 
-### INDEXING WITH LABELS
+############################## <<< INDEXING WITH LABELS >>> ############################################
 # print(bw['Hum Tumhare Hain Sanam'])
 
-### FANCY INDEXING
+############################## <<< FANCY INDEXING >>> ##################################################
 # print(subs[[0,100,364]])
 
-
-### SERIES WITH PYTHON FUNCTIONALITIES
+############################## <<< SERIES WITH PYTHON FUNCTIONALITIES >>> ###############################
 # len , type , dir , sorted , max , min
 # type conversion
 # membership operator
@@ -139,11 +139,11 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 # print('Vicky Ahuja' in bw.values)    #True
 
 
-###LOOPING
+############################## <<< LOOPING >>> #################################################
 # for i in bw.index:
 #   print(i)
 
-### Boolean Indexing on Series
+############################## <<< Boolean Indexing on Series >>> ###############################
 
 # Find no of 50's and 100's scored by kohli
 # print(vk[vk >= 50].size)
@@ -158,14 +158,14 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 # num_movies = bw.value_counts()
 # print(num_movies[num_movies > 20])
 
-# PLOTTING GRAPH ON SERIES
+############################## <<< PLOTTING GRAPH ON SERIES >>> ###############################
 # subs.plot()
 # plt.show()
 
 # bw.value_counts().head(20).plot(kind='pie')
 # plt.show()
 
-### Some Important Series Methods
+############################## <<< Some Important Series Methods >>> ###############################
 # astype
 # between
 # clip  --> return less than 100 to 100 more than 200 to 200
@@ -220,7 +220,7 @@ bw = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-16\bollyw
 # print(copy)
 # print(vk.head())
 
-### VIDEO 01
+############################## <<< VIDEO 01 >>> ###############################
 ### DATA FRAMES IN PANDAS
 ### using lists
 student_data = [
@@ -245,14 +245,13 @@ students = pd.DataFrame(student_dict)
 students.set_index('name' ,inplace=True)
 # print(students)
 
-### using read_csv
+############################## <<< using read_csv >>> ###############################
 movies = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\movies.csv')
 # print(movies.sample(3))
 
 iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\ipl-matches.csv')
-# print(iplData.sample(3))
 
-### DataFrame Attributes and Methods
+############################## <<< DataFrame Attributes and Methods >>> ###############################
 # shape , dtypes , index , columns , values , head and tails , sample , info , describe , isnull,
 #duplicated , rename
 
@@ -270,22 +269,23 @@ iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\i
 # dataFrameList.rename(columns={'iq': 'IQ' , 'marks' : 'MARKS' , 'package' : 'LPA'} , inplace=True)
 # print(dataFrameList)
 
-
-### Math Methods
+############################## <<< Math Methods >>> ###############################
 
 # print(dataFrameList)
 # print(dataFrameList.sum(axis=1))
 # print(dataFrameList.mean(axis=1))
 # print(dataFrameList.var())
 
-### Selecting cols from a DataFrame
+############################## <<< Selecting cols from a DataFrame >>> ###############
+
 # single cols
 # print(movies['title_x'])
 
 # multiple cols
 # print(movies[['title_x' , 'imdb_id' , 'summary']])
 
-### Selecting rows from a DataFrame
+############################## <<< Selecting rows from a DataFrame >>> ###############
+
 # iloc - searches using index positions
 # loc - searches using index labels
 
@@ -298,7 +298,7 @@ iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\i
 # print(movies.loc[0:2]) # starting ending values works with len not index
 # print(movies.loc[0:2,'title_x':'poster_path'])
 
-### Filtering a DataFrame
+############################## <<< Filtering a DataFrame >>> #######################
 
 ## find all the final winners
 # print(iplData[iplData['MatchNumber'] == 'Final'][['WinningTeam' , 'Season']])
@@ -323,15 +323,16 @@ iplData = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-17\i
 # movies['lead actors'] = first_names
 # print(movies['lead actors'])
 
-## Important DataFrame Functions
+############################## <<< Important DataFrame Functions >>> #######################
+
 # astype
 # iplData['ID'] = iplData['ID'].astype('int16')
 # iplData['Team1'] = iplData['Team1'].astype('category')
 # iplData['Team2'] = iplData['Team2'].astype('category')
 # print(iplData.info())
 
+############################## <<< VIDEO 02 >>> ###########################################
 
-###VIDEO 02
 # value_counts(series & Dataframes) , sort_values() , rank , set index , rename , reset index , unique , nunique ,
 # isnull , notnull , hasnans , dropna , fillna , drop_duplicates , drop , apply , isin , corr
 # nlargest , nsmallest , insert , copy
@@ -616,6 +617,70 @@ grpOnMulCol = topMovies.groupby(['Director','Star1'])
 #     gayle = matchDeleviries[matchDeleviries['batsman'] == group]
 #     return(gayle.groupby('match_id')['batsman_runs'].sum().sort_values(ascending=False).head(1).values[0])
 # print(highest('CH Gayle'))
+
+
+########################### <<< Merging, Joining & Concatenating >>> ##########################################
+stdDF = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-20\students.csv')
+# print(stdDF.head(2))
+
+coursesDF = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-20\courses.csv')
+# print(coursesDF.head(2))
+
+regMonthOne = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-20\reg-month1.csv')
+# print(regMonthOne.head(2))
+
+regMonthTwo = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-20\reg-month2.csv')
+# print(regMonthTwo.head(2))
+
+############################################################################################################
+# pd.concat
+# df.concat
+# ignore_index
+# df.append
+# mullitindex -> fetch using iloc
+# concat dataframes horizontally
+
+regs = pd.concat([regMonthOne,regMonthTwo],ignore_index = True)
+# print(regs)
+
+# regs = regMonthOne._append(regMonthTwo , ignore_index=True)
+# print(regs)
+
+multiIndexDF = pd.concat([regMonthOne,regMonthTwo] , keys=['NOV' , 'DEC'])
+# print(multiIndexDF.loc['NOV'])
+# print(multiIndexDF.loc['NOV' , 0])
+# print(multiIndexDF.loc['NOV'].iloc[0:5])
+# print(multiIndexDF.loc['DEC'].iloc[5:])
+
+############################### <<< INNER JOINS >>> ########################################
+# print(stdDF.merge(regs, how = 'inner' , on = 'student_id'))
+
+############################### <<< LEFT JOINS >>> ########################################
+# print(coursesDF.merge(regs , how = 'left' , on = 'course_id'))
+
+############################### <<< RIGHT JOINS >>> ########################################
+stdTempDF = pd.DataFrame({
+    'student_id':[26,27,28],
+    'name':['Nitish','Ankit','Rahul'],
+    'partner':[28,26,17]
+})
+stdDF = pd.concat([stdDF,stdTempDF] , ignore_index = True)
+# print(stdDF.merge(regs , how = 'right' , on = 'student_id'))
+
+############################### <<< OUTER JOINS >>> ########################################
+# print(stdDF.merge(regs,how='outer',on='student_id').tail(10))
+
+############################### <<< QUESTIONS >>> ########################################
+### 1. find total revenue generated
+# print(regs.merge(coursesDF , how = 'inner' , on = 'course_id')['price'].sum())
+
+### 2. find month by month revenue
+# novAndDec = pd.concat([regMonthOne,regMonthTwo] , keys=['NOV' , 'DEC']).reset_index()
+# print(novAndDec.merge(coursesDF , how='inner' , on = 'course_id').groupby('level_0')['price'].sum())
+
+
+
+
 
 
 
