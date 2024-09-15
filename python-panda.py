@@ -678,13 +678,29 @@ stdDF = pd.concat([stdDF,stdTempDF] , ignore_index = True)
 # novAndDec = pd.concat([regMonthOne,regMonthTwo] , keys=['NOV' , 'DEC']).reset_index()
 # print(novAndDec.merge(coursesDF , how='inner' , on = 'course_id').groupby('level_0')['price'].sum())
 
+### 3. Print the registration table
+### cols -> name -> course -> price
+# print(regs.merge(coursesDF , how = 'inner' , on = 'course_id').merge(stdDF , how = 'inner' , on = 'student_id')[['name' , 'course_name' , 'price']])
 
+### 4. Plot bar chart for revenue/course
+# coursesDF.groupby('course_name')['price'].sum().sort_values(ascending=False).plot(kind = 'bar')
+# plt.show()
 
+### 5. find students who enrolled in both the months
+# commonStudents = np.intersect1d(regMonthOne['student_id'],regMonthTwo['student_id'])
+# print(stdDF[stdDF['student_id'].isin(commonStudents)])
 
+### 6. find course that got no enrollment
+# courses['course_id']
+# regs['course_id']
 
+# 1st way: print(coursesDF.merge(regs , how = 'left' ,on = 'course_id').tail(2)[['course_id' , 'course_name' , 'price']])
+# uncommonCOurseID = np.setdiff1d(coursesDF['course_id'] , regs['course_id'])
+# print(coursesDF[coursesDF['course_id'].isin(uncommonCOurseID)])
 
-
-
+### 7. find students who did not enroll into any courses
+# diffStdReg = np.setdiff1d(stdDF['student_id'] , regs['student_id'])
+# print(stdDF[stdDF['student_id'].isin(diffStdReg)].shape[0])
 
 
 
