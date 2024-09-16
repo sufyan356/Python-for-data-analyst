@@ -702,5 +702,35 @@ stdDF = pd.concat([stdDF,stdTempDF] , ignore_index = True)
 # diffStdReg = np.setdiff1d(stdDF['student_id'] , regs['student_id'])
 # print(stdDF[stdDF['student_id'].isin(diffStdReg)].shape[0])
 
+### 8. Print student name -> partner name for all enrolled students
+# self join
 
+# print(stdDF.merge(stdDF ,how = 'inner', left_on='partner' , right_on='student_id')[['name_x' , 'name_y']])
 
+### 9. find top 3 students who did most number enrollments
+# print(stdDF.merge(regs , on = 'student_id').groupby(['name' , 'student_id'])['student_id'].count().sort_values(ascending=False))
+
+### 10. find top 3 students who spent most amount of money on courses
+# print(stdDF.merge(regs , on = 'student_id').merge(coursesDF , on = 'course_id').groupby(['name' , 'student_id'])['price'].sum().sort_values(ascending=False).head(3))
+
+### Alternate syntax for merge
+# students.merge(regs)
+
+# print(pd.merge(stdDF,regs,how='inner',on='student_id'))
+
+### IPL Problems
+
+### find top 3 studiums with highest sixes/match ratio
+
+matches = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-20\matches.csv')
+# matchMergeData = matches.merge(matchDeleviries, left_on='id' , right_on='match_id')
+# six = matchMergeData[matchMergeData['batsman_runs'] == 6]
+# noOfSixes = six.groupby('venue')['venue'].count()
+# noOfMatches = matches['venue'].value_counts()
+# print((noOfSixes / noOfMatches).sort_values(ascending=False).round(2))
+
+### find orange cap holder of all the seasons
+
+# matchMergeData = matchDeleviries.merge(matches , left_on = 'match_id' , right_on = 'id')
+# groupedData = matchMergeData.groupby(['season' , 'batsman'])['batsman_runs'].sum().reset_index().sort_values(by=['season' , 'batsman_runs'] , ascending = [False , False])
+# print(groupedData.head(10))
