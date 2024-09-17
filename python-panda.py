@@ -838,15 +838,101 @@ columns = multiIndexCol)
 # stackWithLevelZero = branchDFThree.stack(future_stack=True)
 # print(stackWithLevelZero)
 
-stackWithLevelOne = branchDFThree.stack(future_stack=True).stack(future_stack=True)
+# stackWithLevelOne = branchDFThree.stack(future_stack=True).stack(future_stack=True)
 # print(stackWithLevelOne)
 
 
-unstackWithLevelOne = stackWithLevelOne.unstack()
-print(unstackWithLevelOne)
-print()
-unstackWithLevelTwo = stackWithLevelOne.unstack().unstack()
-print(unstackWithLevelTwo)
+# unstackWithLevelOne = stackWithLevelOne.unstack()
+# print(unstackWithLevelOne)
+# print()
+# unstackWithLevelTwo = stackWithLevelOne.unstack().unstack()
+# print(unstackWithLevelTwo)
+
+
+
+####################### <<< Working with multiindex dataframes >>> ################################
+# head , tail , shape , info , duplicated , isnull
+
+# print(branchDFThree.head())
+# print(branchDFThree.tail())
+# print(branchDFThree.shape)
+# print(branchDFThree.info())
+# print(branchDFThree.duplicated())
+# print(branchDFThree.isnull())
+
+####################### <<< EXTRACTING SINGLE ROW >>> ################################
+# print(branchDFThree.loc[('cs' , 2023)])
+
+####################### <<< EXTRACTING MUTIPLE ROW >>> ################################
+### using loc
+
+# print(branchDFThree.loc[('se' , 2022):('cs' , 2023)]) # got error b/c index not sorted
+# print(branchDFThree.sort_index(level=[0,1]).loc[('cs' , 2022):('se' , 2023)])
+
+### using iloc
+# print(branchDFThree.iloc[0:6])
+
+####################### <<< EXTRACTING COLUMNS >>> ################################
+
+# print(branchDFThree['karachi'])
+# print(branchDFThree['karachi']['avg_package'])
+# print(branchDFThree.iloc[: , 1:4])
+
+####################### <<< EXTRACTING FANCY INDEXING >>> #########################################
+
+# print(branchDFThree.iloc[[0,3] , [0,2,3]])
+
+
+################################### <<< SORTING INDEX >>> ###########################################
+
+# print(branchDFThree.sort_index())
+# print(branchDFThree.sort_index(level=0 , ascending=True))
+# print(branchDFThree.sort_index(ascending=[True,False]))
+# print(branchDFThree.sort_index(level=[0,1] , ascending=[True,False]))
+
+################################### <<< multiindex dataframe(col) -> transpose >>> ##########################
+# print(branchDFThree.transpose())
+
+
+################################### <<< SWAP LEVEL >>> ######################################################
+# print(branchDFThree.swaplevel())
+# print(branchDFThree.swaplevel(axis = 1))
+
+################################### <<< LONG VS WIDE DATA>>> ###############################################
+### LONG --> MELT FUNC
+### id_vars --> you want to unchanged the columns
+
+myData = pd.DataFrame({'se':[100] , 'cs':[200] , 'ce':[60]})
+# print(myData)
+print(myData.melt(var_name='branch' , value_name='students'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
