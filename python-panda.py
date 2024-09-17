@@ -902,9 +902,26 @@ columns = multiIndexCol)
 ### LONG --> MELT FUNC
 ### id_vars --> you want to unchanged the columns
 
-myData = pd.DataFrame({'se':[100] , 'cs':[200] , 'ce':[60]})
+# myData = pd.DataFrame({'se':[100] , 'cs':[200] , 'ce':[60]})
 # print(myData)
-print(myData.melt(var_name='branch' , value_name='students'))
+# print(myData.melt(var_name='branch' , value_name='students'))
+
+myData = pd.DataFrame({
+    'branch':['cs','se','ce','ds'],
+    '2020':[1,2,3,4],
+    '2021':[5,6,7,8],
+    '2022':[9,10,11,12],
+})
+# print(myData.melt(id_vars=['branch'] , var_name='year', value_name='students'))
+
+################################### <<< melt -> real world example >>> ###############################################
+covidConfirmCases = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-21\time_series_covid19_confirmed_global.csv')
+covidConfirmDeath = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-21\time_series_covid19_deaths_global.csv')
+
+meltCovidConfirmCases = covidConfirmCases.melt(id_vars=['Province/State' , 'Country/Region' , 'Lat' , 'Long'] , var_name = 'date' , value_name = 'total_cases')
+meltCovidConfirmDeath = covidConfirmDeath.melt(id_vars=['Province/State' , 'Country/Region' , 'Lat' , 'Long'] , var_name = 'date' , value_name = 'total_death')
+
+# print(meltCovidConfirmDeath.merge(meltCovidConfirmCases , on = ['Province/State' , 'Country/Region' , 'Lat' , 'Long']).head())  # lot of mem used
 
 
 
