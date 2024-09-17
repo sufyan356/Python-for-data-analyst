@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from pandas import MultiIndex
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
@@ -734,3 +734,122 @@ matches = pd.read_csv(r'C:\Users\Windows10\Desktop\my-data\datasets-session-20\m
 # matchMergeData = matchDeleviries.merge(matches , left_on = 'match_id' , right_on = 'id')
 # groupedData = matchMergeData.groupby(['season' , 'batsman'])['batsman_runs'].sum().reset_index().sort_values(by=['season' , 'batsman_runs'] , ascending = [False , False])
 # print(groupedData.head(10))
+
+
+
+############################### <<< MULTI INDEX SERIES & DATAFRAMES >>> ###############################
+### Series is 1D and DataFrames are 2D objects
+### can we have multiple index? Let's try
+
+
+############################### <<< WRONG APPROACH >>> ###############################
+# indexVal = [('se' , 2022) , ('se' , 2023) , ('se' , 2024) , ('cs' , 2022) , ('cs' , 2023) , ('cs' , 2024)]
+# ser = pd.Series([1,2,3,4,5,6] , index = indexVal)
+# print(ser)
+# print(ser['se']) #error
+
+############################### <<< WRIGHT APPROACH >>> ###############################
+### 1. pd.MultiIndex.from_tuples()
+
+# indexVal = [('se' , 2022) , ('se' , 2023) , ('se' , 2024) , ('cs' , 2022) , ('cs' , 2023), ('cs' , 2024)]
+# multiIndex = pd.MultiIndex.from_tuples(indexVal)
+# ser = pd.Series([1,2,3,4,5,6] , index = multiIndex)
+# print(ser)
+# print(ser['se'])
+# print(ser['cs'])
+# print(ser.index.levels[1])
+
+### 2. pd.MultiIndex.from_product()
+
+# multiIndex = pd.MultiIndex.from_product([['se','cs'],[2022,2023,2024]])
+# ser = pd.Series([1,2,3,4,5,6],index = multiIndex)
+# print(ser)
+
+
+### multiIndex with index
+# multiIndex = pd.MultiIndex.from_product([['se','cs'],[2022,2023,2024]])
+# multiIndexCol = pd.MultiIndex.from_product([['karachi','lahore'],['avg_package','students']])
+
+# branchDFOne = pd.DataFrame(
+#     [
+#         [1,2],
+#         [3,4],
+#         [5,6],
+#         [7,8],
+#         [9,10],
+#         [11,12]
+#     ],
+#     index = multiIndex,
+#     columns = ['avg_package','students']
+# )
+# print(branchDFOne)
+
+# branchDFTwo = pd.DataFrame([
+#     [1,2,3,4],
+#     [5,6,7,8],
+#     [9,10,11,12],
+#     [11,12,13,14]
+# ],
+# index = [2022 , 2023 ,2024 , 2025],
+# columns = multiIndexCol)
+# print(branchDFTwo)
+# print(branchDFTwo.loc[2022])
+
+################################ <<< unstack & stack with multiindex >>> ########################################
+# (1) unstack --> convert rows to col
+# (2) stack --> convert col to rows
+
+multiIndex = pd.MultiIndex.from_product([['se','cs'],[2022,2023,2024]])
+multiIndexCol = pd.MultiIndex.from_product([['karachi','lahore'],['avg_package','students']])
+
+# ser = pd.Series([1,2,3,4,5,6],index = multiIndex)
+# print(ser)
+# print(type(ser))
+# print()
+
+# unstackLevel0 = ser.unstack()
+# print(unstackLevel0)
+# print(type(unstackLevel0))
+# print()
+
+# unstackLevel1 = ser.unstack().unstack()
+# print(unstackLevel1)
+# print(type(unstackLevel1))
+
+### STACK
+### STCK ONLY WORK WITH DATAFRAME
+
+# print(unstackLevel0.stack())
+
+################################ <<< unstack & stack with multiindex & multi columns >>> #############################
+
+branchDFThree = pd.DataFrame([
+    [1,2,3,4],
+    [5,6,7,8],
+    [9,10,11,12],
+    [13,14,15,16],
+    [17,18,19,20],
+    [21,22,23,24]
+],
+index = multiIndex,
+columns = multiIndexCol)
+# print(branchDFThree)
+
+# stackWithLevelZero = branchDFThree.stack(future_stack=True)
+# print(stackWithLevelZero)
+
+stackWithLevelOne = branchDFThree.stack(future_stack=True).stack(future_stack=True)
+# print(stackWithLevelOne)
+
+
+unstackWithLevelOne = stackWithLevelOne.unstack()
+print(unstackWithLevelOne)
+print()
+unstackWithLevelTwo = stackWithLevelOne.unstack().unstack()
+print(unstackWithLevelTwo)
+
+
+
+
+
+
